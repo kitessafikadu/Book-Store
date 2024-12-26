@@ -1,0 +1,49 @@
+{% extends 'publisher/base.html' %} {% load static %} {% block body %}
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+          <p class="text-justify lead text-secondary">
+            Welcome to <strong class="text-primary">Feedmind</strong>, a
+            Django-based book store. Our team consists of
+            <strong class="text-primary"
+              >fourth-year Software Engineering students</strong
+            >
+            from Jimma University, Ethiopia. We are driven by a passion for
+            creating innovative solutions that address pressing community
+            challenges. Through technology, we aim to bridge gaps and bring
+            about impactful change.
+          </p>
+          <hr class="my-4" />
+          <p class="text-justify lead text-secondary">
+            Feedmind was born from our desire to address the issue of limited
+            access to books and knowledge resources. Our platform connects
+            individuals who have home-based personal libraries, transforming
+            them into a global network of shared knowledge. Users can upload
+            books they want to share while also exploring and accessing books
+            shared by others around the world.
+          </p>
+          <hr class="my-4" />
+          <p class="text-justify lead text-secondary">
+            As a team, we are committed to tackling real-world problems with
+            cutting-edge solutions. Our work is fueled by a shared vision to
+            make knowledge more accessible and inclusive for everyone, fostering
+            collaboration and growth within communities.
+          </p>
+          <div class="text-center">
+            <p class="text-primary font-weight-bold display-6">
+              Together, let's make a difference!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
