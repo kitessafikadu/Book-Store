@@ -3,16 +3,18 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 #User = get_user_model()
 class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_user = models.BooleanField(default=True)
+    profile_picture = models.ImageField(upload_to='bookapp/profile_pics/', null=True, blank=True)
 
     class Meta:
         swappable = 'AUTH_USER_MODEL'
 
-
+    
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)

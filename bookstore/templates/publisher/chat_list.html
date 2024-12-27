@@ -26,7 +26,8 @@
         {% endif %}
 
         <p><b class="chat-content">{{ chat|linebreaks }}</b></p>
-        <small class="chat-date">{{ chat.posted_at }}</small>
+        <!-- <small class="chat-date">{{ chat.posted_at }}</small> -->
+        <small class="chat-date">{{chat.posted_at|timesince}} ago</small>
       </div>
       {% empty %}
       <h1 class="text-center text-gray-500">

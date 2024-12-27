@@ -18,6 +18,28 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+@login_required
+def profile(request):
+    return render(request, 'bookstore/profile.html',{'object': request.user})
+
+@login_required
+def update_profile(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserForm(instance=user)
+
+    return render(request, 'bookstore/update_profile.html', {'form': form})
+
 
 # Shared Views
 def custom_404_view(request, exception):
@@ -59,25 +81,35 @@ def register_form(request):
 
 
 def registerView(request):
-	if request.method == 'POST':
-		username = request.POST['username']
-		email = request.POST['email']
-		password = request.POST['password']
-		password = make_password(password)
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
 
-		a = User(username=username, email=email, password=password)
-		a.save()
-		messages.success(request, 'Account was created successfully')
-		return redirect('home')
-	else:
-	    messages.error(request, 'Registration fail, try again later')
-	    return redirect('regform')
+        try:
+            user = User(first_name=first_name, last_name=last_name, username=username, email=email, password=make_password(password))
+            user.save()
 
+            messages.success(request, 'Account was created successfully')
+            return redirect('home')
+        except Exception as e:
+            messages.error(request, f'Registration failed: {str(e)}')
+            return redirect('regform')
+    else:
+        messages.error(request, 'Invalid request method')
+        return redirect('regform')
+    
 # Publisher views
 @login_required
 def publisher(request):
 	return render(request, 'publisher/home.html')
 
+def books_by_category(request):
+    category = request.GET.get('category')  # Fetch selected category from request
+    books = Book.objects.filter(category=category) if category else Book.objects.all()
+    return render(request, 'publisher/books.html', {'books': books, 'selected_category': category})
 
 @login_required
 def uabook_form(request):

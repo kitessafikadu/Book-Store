@@ -18,8 +18,12 @@ urlpatterns = [
  path('logout/', views.logoutView, name='logout'),
  path('regform/', views.register_form, name='regform'),
  path('register/', views.registerView, name='register'),
+ path('profile/', views.profile, name='profile'),
+ path('profile/update/', views.update_profile, name='update_profile'),
 
  # Publisher URL's
+ path('books/', views.books_by_category, name='books_by_category'),
+
  path('publisher/', views.UBookListView.as_view(), name='publisher'),
  path('uabook_form/', views.uabook_form, name='uabook_form'),
  path('uabook/', views.uabook, name='uabook'),
@@ -31,6 +35,7 @@ urlpatterns = [
  path('send_feedback/', views.send_feedback, name='send_feedback'),
  path('about/', views.about, name='about'),
  path('usearch/', views.usearch, name='usearch'),
+
 
  # Admin URL's
  path('dashboard/', views.dashboard, name='dashboard'),

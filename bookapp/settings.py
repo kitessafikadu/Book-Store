@@ -10,13 +10,16 @@ STATIC_DIR=os.path.join(BASE_DIR,'static')
 
 # forgot password email settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # If you're using Gmail
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kitessafikadu@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'kitessafikadu@2021'  # Your Gmail password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 

@@ -1,0 +1,75 @@
+{% extends 'publisher/base.html' %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      {% if object.profile_picture %}
+      <img
+        src="{{ object.profile_picture.url }}"
+        class="img-fluid rounded-circle"
+        alt="Profile Picture"
+        style="width: 150px; height: 150px"
+      />
+      {% else %}
+      <i
+        class="fas fa-user-circle text-primary"
+        style="font-size: 150px; width: 150px; height: 150px"
+      ></i>
+      {% endif %}
+    </div>
+    <div class="col-md-8">
+      <p><strong>Username:</strong> {{ object.username }}</p>
+      <p><strong>First Name:</strong> {{ object.first_name }}</p>
+      <p><strong>Last Name:</strong> {{ object.last_name }}</p>
+      <p><strong>Email:</strong> {{ object.email }}</p>
+    </div>
+  </div>
+
+  <!-- Update Profile Button -->
+  <a href="{% url 'update_profile' %}" class="btn btn-primary mt-3"
+    >Update Profile</a
+  >
+
+  <!-- Logout Modal Trigger -->
+  <button
+    class="btn btn-danger mt-3"
+    data-bs-toggle="modal"
+    data-bs-target="#logoutModal"
+  >
+    Logout
+  </button>
+</div>
+
+<!-- Logout Modal -->
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="logoutModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Ready to Leave?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Select "Logout" below if you are ready to end your current session.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
